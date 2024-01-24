@@ -17,10 +17,11 @@ cursor.execute('''
     )
 ''')
 
+
 def fetch_and_insert(url):
     response = requests.get(url)
     data = response.json()
-    
+
     for character in data['results']:
         cursor.execute('''
             INSERT INTO characters (name, height, mass, hair_color, skin_color, eye_color, birth_year, gender)
@@ -34,19 +35,8 @@ def fetch_and_insert(url):
     if data['next']:
         fetch_and_insert(data['next'])
 
+
 # Starting URL
 fetch_and_insert('https://swapi.dev/api/people/')
 
 conn.close()
-
-conn = sqlite3.connect('starwars.db')
-cursor = conn.cursor()
-
-cursor.execute("SELECT * FROM characters")
-rows = cursor.fetchall()
-
-for row in rows:
-    print(row)
-
-conn.close()
-
