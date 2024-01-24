@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character Display</title>
+</head>
+<body>
+    <h1>Data Ordered by ELO</h1>
+    <table border="1">
+        <tr>
+            <!-- Replace these headers with your actual column names -->
+            <th>Name</th>
+            <th>ELO</th>
+        </tr>
+        {% for row in data %}
+            <tr>
+                <!-- Ensure the number of <td> tags matches the number of columns in your table -->
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
