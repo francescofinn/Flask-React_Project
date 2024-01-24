@@ -8,12 +8,14 @@
     <table border="1">
         <tr>
             <!-- Replace these headers with your actual column names -->
+            <th>Rank</th>
             <th>Name</th>
             <th>ELO</th>
         </tr>
         {% for row in data %}
             <tr>
                 <!-- Ensure the number of <td> tags matches the number of columns in your table -->
+                <td>{{ loop.index }}</td>
                 <td>{{ row[0] }}</td>
                 <td>{{ row[1] }}</td>
             </tr>
