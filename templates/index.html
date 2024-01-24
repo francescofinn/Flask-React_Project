@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Character Display</title>
 </head>
+
 <body>
     <h1>Data Ordered by ELO</h1>
 
     <div>
         {% for character in pair_data %}
-            <button type="button" onclick="location.href='/character/{{ character[0] }}';">{{ character[0] }}</button>
+        <button type="button" onclick="location.href='/character/{{ character[0] }}';">{{ character[0] }}</button>
         {% endfor %}
     </div>
+
+    <div>
+
+        <button type="button" onclick="updateElo('{{ pair_data[0][0] }}', '{{ pair_data[1][0]}}')"> {{pair_data[0][0] }}
+        </button>
+        <button type="button" onclick="updateElo('{{ pair_data[1][0] }}', '{{ pair_data[0][0]}}')"> {{pair_data[1][0] }}
+        </button>
+
+    </div>
+
+    <script>
+        function updateElo(winner, loser) {
+
+            fetch('/update_elo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ winner: winner, loser: loser })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('ELO updated: ', data);
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+        }
+
+
+    </script>
 
     <table border="1">
         <tr>
@@ -20,13 +55,14 @@
             <th>ELO</th>
         </tr>
         {% for row in data %}
-            <tr>
-                <!-- Ensure the number of <td> tags matches the number of columns in your table -->
-                <td>{{ loop.index }}</td>
-                <td>{{ row[0] }}</td>
-                <td>{{ row[1] }}</td>
-            </tr>
+        <tr>
+            <!-- Ensure the number of <td> tags matches the number of columns in your table -->
+            <td>{{ loop.index }}</td>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+        </tr>
         {% endfor %}
     </table>
 </body>
+
 </html>
