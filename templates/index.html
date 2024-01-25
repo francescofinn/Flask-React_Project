@@ -31,6 +31,8 @@
                 .then(data => {
                     console.log('ELO updated: ', data);
 
+                    window.location.reload();
+
                 })
                 .catch((error) => {
                     console.error('Error:', error);
