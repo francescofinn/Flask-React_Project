@@ -9,12 +9,6 @@
     <h1>Data Ordered by ELO</h1>
 
     <div>
-        {% for character in pair_data %}
-        <button type="button" onclick="location.href='/character/{{ character[0] }}';">{{ character[0] }}</button>
-        {% endfor %}
-    </div>
-
-    <div>
 
         <button type="button" onclick="updateElo('{{ pair_data[0][0] }}', '{{ pair_data[1][0]}}')"> {{pair_data[0][0] }}
         </button>

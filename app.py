@@ -10,7 +10,7 @@ app = Flask(__name__)
 def get_data():
     conn = sqlite3.connect('starwars.db')
     cur = conn.cursor()
-    cur.execute("SELECT name, elo FROM characters ORDER BY elo")
+    cur.execute("SELECT name, elo FROM characters ORDER BY elo DESC")
     data = cur.fetchall()
     cur.close()
     conn.close()
@@ -39,13 +39,15 @@ def get_elo(name):
     cur = conn.cursor()
     cur.execute("SELECT elo FROM characters WHERE name = ?", (name,))
     elo = cur.fetchone()
+    x = elo[0]
     conn.close()
-    return elo[0]
+    # cur.close()
+    return x
 
 
 @app.route('/update_elo', methods=['POST'])
 def update_elo():
-    data = request.get.json()
+    data = request.get_json()
     winner = data['winner']
     loser = data['loser']
 
@@ -71,7 +73,7 @@ def update_elo():
 
     return jsonify({'success': True})
 
-
+@app.route('/')
 def index():
     data = get_data()
     pair_data = get_character_pair()
