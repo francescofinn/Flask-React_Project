@@ -1,6 +1,7 @@
 
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 function App() {
 
@@ -11,17 +12,26 @@ function App() {
   const [characterPair, setCharacterPair] = useState([]);
 
 
+
+
   useEffect(() => {
 
-    fetchCharacterPair();
+
 
     // Fetch data from Flask API
-    fetch('/api/characters') // Adjust the endpoint if i need to
+    fetch('/api/characters')
       .then(response => response.json())
       .then(data => {
-        setCharacters(data);
+        const initialDataWithRanks = data.map((character, index) => ({
+          ...character,
+          previousRank: index + 1,  // Store initial rank
+          rankChange: 'none'        // Initial rank change is none
+        }));
+        setCharacters(initialDataWithRanks);
       })
       .catch(error => console.error('Error:', error));
+
+    fetchCharacterPair();
   }, []);
 
   const fetchCharacterPair = () => {
@@ -42,15 +52,47 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        // After a vote, refresh character pair and rankings
-        fetchCharacterPair();
+        console.log('ELO updated:', data);
+
         // Fetch character rankings to update the table
         fetch('/api/characters')
           .then(response => response.json())
-          .then(data => setCharacters(data));
+          .then(updatedData => {
+
+            const updatedCharactersWithRankChange = updatedData.map((character, index) => {
+              const currentRank = index + 1;
+              const previousCharacter = characters.find(c => c.name === character.name);
+
+              // Determine the rank change
+              let rankChange = 'none';
+              if (previousCharacter) {
+                if (previousCharacter.previousRank > currentRank) {
+                  rankChange = 'up';
+                } else if (previousCharacter.previousRank < currentRank) {
+                  rankChange = 'down';
+                }
+              }
+
+              return {
+                ...character,
+                previousRank: currentRank,  // Update previous rank
+                rankChange                  // Set rank change
+              };
+            });
+
+            setCharacters(updatedCharactersWithRankChange);
+
+            // Fetch the updated character pair for voting
+            fetchCharacterPair();
+          })
+          .catch(error => console.error('Error fetching updated character data:', error));
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => console.error('Error updating ELO:', error));
   };
+
+
+
+
 
 
   return (
@@ -84,8 +126,14 @@ function App() {
 
             const isHighlighted = characterPair.some(pair => pair.name === character.name);
             return (
-              <tr key={index} className={isHighlighted ? 'highlighted-row' : ''}>
-                <td>{index + 1}</td>
+              <tr key={character.name} className={isHighlighted ? 'highlighted-row' : ''}>
+                <td>
+                  {index + 1}
+
+                  {character.rankChange === 'up' && <FaArrowUp style={{ color: 'green' }} />}
+                  {character.rankChange === 'down' && <FaArrowDown style={{ color: 'red' }} />}
+
+                </td>
                 <td>{character.name}</td>
                 <td>{character.elo}</td>
               </tr>
