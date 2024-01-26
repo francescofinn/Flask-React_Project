@@ -1,10 +1,12 @@
 # Francesco Finn & Emilio Munguia
 from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask_cors import CORS
 import random
 import sqlite3
-import elo
+import elo as elo
 
 app = Flask(__name__)
+CORS(app)
 
 
 def get_data():
@@ -72,6 +74,26 @@ def update_elo():
     conn.close()
 
     return jsonify({'success': True})
+
+
+@app.route('/api/characters')
+def chracters_api():
+    data = get_data()
+
+    data_dicts = [{'name': character[0], 'elo': character[1]}
+                  for character in data]
+    return jsonify(data_dicts)
+
+
+@app.route('/api/character-pair')
+def character_pair_api():
+    pair_data = get_character_pair()  # Your existing function to get a character pair
+
+    pair_data_dicts = [{'name': character[0]}
+                       for character in pair_data]
+
+    return jsonify(pair_data_dicts)
+
 
 @app.route('/')
 def index():
