@@ -25,10 +25,11 @@ function App() {
   }, []);
 
   const fetchCharacterPair = () => {
+
     fetch('/api/character-pair') // Adjust the endpoint 
       .then(response => response.json())
-      .then(data => setCharacterPair(data))
-      .catch(error => console.error('Error:', error));
+      .then(data => { setCharacterPair(data); })
+      .catch(error => console.error('Error fetching character pair:', error));
   };
 
   const handleVote = (winner, loser) => {
@@ -78,13 +79,18 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {characters.map((character, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{character.name}</td>
-              <td>{character.elo}</td>
-            </tr>
-          ))}
+          {characters.map((character, index) => {
+
+
+            const isHighlighted = characterPair.some(pair => pair.name === character.name);
+            return (
+              <tr key={index} className={isHighlighted ? 'highlighted-row' : ''}>
+                <td>{index + 1}</td>
+                <td>{character.name}</td>
+                <td>{character.elo}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
