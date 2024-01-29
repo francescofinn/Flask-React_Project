@@ -2,21 +2,156 @@
   background-color: #ffff99;
 }
 
+h1,
+h2 {
+  font-family: 'MyCustomFont', sans-serif;
+  text-shadow:
+    -1px -1px 0 rgb(255, 255, 255),
+    1px -1px 0 rgb(255, 255, 255),
+    -1px 1px 0 rgb(255, 255, 255),
+    1px 1px 0 rgb(255, 255, 255);
+
+}
+
+
 .character-vote {
   display: flex;
   align-items: center;
+  justify-content: center;
+  /* Center horizontally */
   margin-bottom: 10px;
+  flex-direction: column;
+  /* Stack items vertically */
 }
 
 .character-image {
-  width: 150px;
-  height: 150px;
-  min-width: 100px;
-  min-height: 100px;
-  max-width: 1000px;
-  max-height: 1000px;
-  margin-right: 10px;
+  width: 225px;
+  height: 225px;
+  margin-bottom: 20px;
+  margin-right: 25px;
+  margin-left: 25px;
+  /* Add space between image and button */
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+}
+
+button {
+  align-self: center;
+  /* Center button if needed */
+}
+
+.character-vote-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  /* If you want them stacked vertically */
+  width: 100%;
+  /* Adjust as needed */
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  background-color: rgba(255, 255, 255, 0.7);
+  ;
+  /* Or any other width you prefer */
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+  /* Adjust size as needed */
+  color: #333;
+  /* Adjust color as needed */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: #555;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('../fonts/Soloist-Z6M8.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@media (max-width: 600px) {
+  .character-vote {
+    flex-direction: row;
+  }
+
+  .character-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  table {
+    width: 100%;
+    /* Full width on smaller screens */
+  }
+
+  h1,
+  h2 {
+    font-size: smaller;
+
+  }
+
+
+}
+
+body {
+  background-image: url('../public/images/background.jpg');
+  /* Adjust the path as necessary */
+  background-size: cover;
+  /* Cover the entire viewport */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-attachment: fixed;
+  /* Optional: Fix the background */
+  margin: 0;
+  /* Remove default margin */
+  height: 100%;
+  /* Ensure the body takes full viewport height */
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Semi-transparent white */
+  padding: 20px;
+}
+
+.text-with-shadow {
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  /* Black shadow for legibility */
 }

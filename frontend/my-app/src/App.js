@@ -102,7 +102,7 @@ function App() {
       <h2>Vote Your Favourite of the Two Below!</h2>
 
 
-      <div>
+      <div className="character-vote-container">
         {characterPair.map((character, index) => (
           <div key={index} className="character-vote">
             <img src={character.image} alt={character.name} className="character-image" onError={(e) => e.target.src = 'https://cdn-icons-png.flaticon.com/512/7077/7077986.png'} />
