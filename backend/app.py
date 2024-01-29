@@ -4,15 +4,17 @@ from flask_cors import CORS
 import random
 import sqlite3
 from backend.elo import EloRating
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 
 def get_data():
-    conn = sqlite3.connect('starwars.db')
+    database_path = os.path.join(os.path.dirname(__file__), 'starwars.db')
+    conn = sqlite3.connect(database_path)
     cur = conn.cursor()
-    cur.execute("SELECT name, elo, image FROM characters ORDER BY elo DESC")
+    cur.execute("SELECT name, elo FROM characters ORDER BY elo DESC")
     data = cur.fetchall()
     cur.close()
     conn.close()
@@ -80,7 +82,7 @@ def update_elo():
 def chracters_api():
     data = get_data()
 
-    data_dicts = [{'name': character[0], 'elo': character[1], 'image': character[2]}
+    data_dicts = [{'name': character[0], 'elo': character[1]}
                   for character in data]
     return jsonify(data_dicts)
 
