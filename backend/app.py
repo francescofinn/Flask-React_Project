@@ -87,7 +87,7 @@ def chracters_api():
 
 @app.route('/api/character-pair')
 def character_pair_api():
-    pair_data = get_character_pair()  # Your existing function to get a character pair
+    pair_data = get_character_pair()
 
     pair_data_dicts = [{'name': character[0], 'image': character[1]}
                        for character in pair_data]

@@ -46,9 +46,9 @@ button {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  /* If you want them stacked vertically */
+
   width: 100%;
-  /* Adjust as needed */
+
 }
 
 table {
@@ -57,7 +57,7 @@ table {
   width: 40%;
   background-color: rgba(255, 255, 255, 0.7);
   ;
-  /* Or any other width you prefer */
+
   border-collapse: collapse;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -69,9 +69,9 @@ h2 {
 
 h1 {
   font-size: 3em;
-  /* Adjust size as needed */
+
   color: #333;
-  /* Adjust color as needed */
+
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -129,29 +129,29 @@ th {
 
 body {
   background-image: url('../public/images/background.jpg');
-  /* Adjust the path as necessary */
+
   background-size: cover;
-  /* Cover the entire viewport */
+
   background-position: center;
-  /* Center the image */
+
   background-repeat: no-repeat;
-  /* Do not repeat the image */
+
   background-attachment: fixed;
-  /* Optional: Fix the background */
+
   margin: 0;
-  /* Remove default margin */
+
   height: 100%;
-  /* Ensure the body takes full viewport height */
+
 }
 
 .container {
   background-color: rgba(255, 255, 255, 0.8);
-  /* Semi-transparent white */
+
   padding: 20px;
 }
 
 .text-with-shadow {
   color: #333;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  /* Black shadow for legibility */
+
 }
