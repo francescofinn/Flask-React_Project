@@ -95,6 +95,15 @@ def character_pair_api():
     return jsonify(pair_data_dicts)
 
 
+def reset_elo(new_elo):
+
+    conn = sqlite3.connect('starwars.db')
+    cur = conn.cursor()
+    cur.execute("UPDATE characters SET elo = ?", (new_elo))
+    conn.commit()
+    conn.close()
+
+
 @app.route('/')
 def index():
     data = get_data()
