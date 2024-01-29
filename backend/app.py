@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_cors import CORS
 import random
 import sqlite3
-from elo import EloRating
+from backend.elo import EloRating
 
 app = Flask(__name__)
 CORS(app)
