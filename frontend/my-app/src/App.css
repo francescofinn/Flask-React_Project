@@ -1,3 +1,22 @@
 .highlighted-row {
   background-color: #ffff99;
 }
+
+.character-vote {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.character-image {
+  width: 150px;
+  height: 150px;
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 1000px;
+  max-height: 1000px;
+  margin-right: 10px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}

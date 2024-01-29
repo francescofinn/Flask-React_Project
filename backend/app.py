@@ -12,7 +12,7 @@ CORS(app)
 def get_data():
     conn = sqlite3.connect('starwars.db')
     cur = conn.cursor()
-    cur.execute("SELECT name, elo FROM characters ORDER BY elo DESC")
+    cur.execute("SELECT name, elo, image FROM characters ORDER BY elo DESC")
     data = cur.fetchall()
     cur.close()
     conn.close()
@@ -28,7 +28,7 @@ def get_character_pair():
 
     conn = sqlite3.connect('starwars.db')
     cur = conn.cursor()
-    cur.execute("SELECT name FROM characters WHERE rowid = " +
+    cur.execute("SELECT name, image FROM characters WHERE rowid = " +
                 str(c1) + " OR rowid = " + str(c2))
     pair_data = cur.fetchall()
     cur.close()
@@ -80,7 +80,7 @@ def update_elo():
 def chracters_api():
     data = get_data()
 
-    data_dicts = [{'name': character[0], 'elo': character[1]}
+    data_dicts = [{'name': character[0], 'elo': character[1], 'image': character[2]}
                   for character in data]
     return jsonify(data_dicts)
 
@@ -89,7 +89,7 @@ def chracters_api():
 def character_pair_api():
     pair_data = get_character_pair()  # Your existing function to get a character pair
 
-    pair_data_dicts = [{'name': character[0]}
+    pair_data_dicts = [{'name': character[0], 'image': character[1]}
                        for character in pair_data]
 
     return jsonify(pair_data_dicts)

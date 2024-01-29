@@ -104,9 +104,12 @@ function App() {
 
       <div>
         {characterPair.map((character, index) => (
-          <button key={index} onClick={() => handleVote(character.name, characterPair[1 - index].name)}>
-            {character.name}
-          </button>
+          <div key={index} className="character-vote">
+            <img src={character.image} alt={character.name} className="character-image" onError={(e) => e.target.src = 'https://cdn-icons-png.flaticon.com/512/7077/7077986.png'} />
+            <button key={index} onClick={() => handleVote(character.name, characterPair[1 - index].name)}>
+              {character.name}
+            </button>
+          </div>
         ))}
       </div>
 
