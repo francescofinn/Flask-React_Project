@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_cors import CORS
 import random
 import sqlite3
-import elo as elo
+from elo import EloRating
 
 app = Flask(__name__)
 CORS(app)
@@ -56,7 +56,7 @@ def update_elo():
     winner_elo = get_elo(winner)
     loser_elo = get_elo(loser)
 
-    result = elo.EloRating(winner_elo, loser_elo, 30, 1)
+    result = EloRating(winner_elo, loser_elo, 30, 1)
 
     winner_elo = result[0]
     loser_elo = result[1]
